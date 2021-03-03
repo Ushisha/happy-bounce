@@ -1,22 +1,21 @@
-console.log("Hello World");
-
-var canvas = document.getElementById("canvas");
-var c = canvas.getContext("2d");
-var tx = window.innerWidth;
-var ty = window.innerHeight;
+const canvas = document.getElementById("canvas");
+const c = canvas.getContext("2d");
+let tx = window.innerWidth;
+let ty = window.innerHeight;
 canvas.width = tx;
 canvas.height = ty;
 
-var mousex = 0;
-var mousey = 0;
+let mousex = 0;
+let mousey = 0;
 
 addEventListener("mousemove", function () {
   mousex = event.clientX;
   mousey = event.clientY;
 });
 
-var grav = 0.99;
+const grav = 0.99;
 c.strokeWidth = 5;
+
 function randomColor() {
   return (
     "rgba(" +
@@ -30,6 +29,7 @@ function randomColor() {
     ")"
   );
 }
+
 function Ball() {
   this.color = randomColor();
   this.radius = Math.random() * 20 + 14;
@@ -39,6 +39,7 @@ function Ball() {
   this.dy = Math.random() * 2;
   this.dx = Math.round((Math.random() - 0.5) * 10);
   this.vel = Math.random() / 5;
+
   this.update = function () {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
@@ -47,8 +48,8 @@ function Ball() {
   };
 }
 
-var bal = [];
-for (var i = 0; i < 50; i++) {
+let bal = [];
+for (let i = 0; i < 50; i++) {
   bal.push(new Ball());
 }
 
@@ -59,12 +60,14 @@ function animate() {
     canvas.width = tx;
     canvas.height = ty;
   }
+
   requestAnimationFrame(animate);
   c.clearRect(0, 0, tx, ty);
   for (let i = 0; i < bal.length; i++) {
     bal[i].update();
     bal[i].y += bal[i].dy;
     bal[i].x += bal[i].dx;
+
     if (bal[i].y + bal[i].radius >= ty) {
       bal[i].dy = -bal[i].dy * grav;
     } else {
@@ -88,6 +91,7 @@ function animate() {
     }
   }
 }
+
 animate();
 
 setInterval(function () {
