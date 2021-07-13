@@ -1,4 +1,4 @@
 # Happy-Bounce
 
-create an artwork using canvas.
+simple animation using canvas.
 ![](images/image.png)
